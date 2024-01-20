@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帅锅杀毒软件</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #antivirus-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #logo {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .scan-button, .stop-scan-button {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #scan-progress {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        #scan-progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+            transition: width 0.5s ease-in-out;
+        }
+
+        #scan-result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #result-area {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="antivirus-container">
+        <img id="logo" src="lj.png" alt="Logo">
+        <h1>欢迎使用帅锅杀毒软件</h1>
+        <button class="scan-button" onclick="startScan()">开始扫描</button>
+        <button class="stop-scan-button" onclick="stopScan()">停止扫描</button>
+        <div id="scan-progress">
+            <div id="scan-progress-bar"></div>
+        </div>
+        <div id="scan-result"></div>
+        <div id="result-area"></div>
+    </div>
+
+    <script>
+        let scanInterval;
+
+        function startScan() {
+            // 防止多次点击导致多个扫描同时进行
+            if (!scanInterval) {
+                let progress = 0;
+                const progressBar = document.getElementById("scan-progress-bar");
+                const scanResult = document.getElementById("scan-result");
+                const resultArea = document.getElementById("result-area");
+
+                scanResult.innerText = "";
+                resultArea.innerText = "";
+
+                scanInterval = setInterval(() => {
+                    progress += 10;
+                    progressBar.style.width = progress + "%";
+
+                    if (progress === 100) {
+                        clearInterval(scanInterval);
+                        scanInterval = null;
+                        scanResult.innerText = "扫描完成。";
+                        resultArea.innerText = "扫描结果：\n你他妈不交钱还想杀毒？直接再给你下载100个病毒。";
+                    }
+                }, 500);
+            }
+        }
+
+        function stopScan() {
+            clearInterval(scanInterval);
+            scanInterval = null;
+            document.getElementById("scan-result").innerText = "扫描已停止。";
+        }
+    </script>
+</body>
+</html>
