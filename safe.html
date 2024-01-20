@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>帅锅杀毒软件</title>
+    <title>杀毒软件</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
@@ -20,8 +22,10 @@
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             text-align: center;
+            max-width: 400px;
+            margin: 20px;
         }
 
         #logo {
@@ -34,7 +38,8 @@
             color: #333;
         }
 
-        .scan-button, .stop-scan-button {
+        .scan-button,
+        .stop-scan-button {
             display: inline-block;
             margin: 0 10px;
             padding: 10px 20px;
@@ -44,6 +49,13 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        }
+
+        .scan-button:hover,
+        .stop-scan-button:hover {
+            background-color: #45a049;
+            color: #fff;
         }
 
         #scan-progress {
@@ -52,6 +64,7 @@
             background-color: #ddd;
             border-radius: 4px;
             overflow: hidden;
+            display: none; /* 初始时隐藏进度条 */
         }
 
         #scan-progress-bar {
@@ -59,6 +72,7 @@
             height: 30px;
             background-color: #4caf50;
             transition: width 0.5s ease-in-out;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
         }
 
         #scan-result {
@@ -75,13 +89,15 @@
             border-radius: 4px;
             background-color: #f9f9f9;
             text-align: left;
+            line-height: 1.5;
         }
     </style>
 </head>
+
 <body>
     <div id="antivirus-container">
         <img id="logo" src="lj.png" alt="Logo">
-        <h1>欢迎使用帅锅杀毒软件</h1>
+        <h1>杀毒软件</h1>
         <button class="scan-button" onclick="startScan()">开始扫描</button>
         <button class="stop-scan-button" onclick="stopScan()">停止扫描</button>
         <div id="scan-progress">
@@ -101,9 +117,12 @@
                 const progressBar = document.getElementById("scan-progress-bar");
                 const scanResult = document.getElementById("scan-result");
                 const resultArea = document.getElementById("result-area");
+                const scanProgress = document.getElementById("scan-progress");
 
                 scanResult.innerText = "";
                 resultArea.innerText = "";
+
+                scanProgress.style.display = "block"; // 显示进度条
 
                 scanInterval = setInterval(() => {
                     progress += 10;
@@ -114,6 +133,7 @@
                         scanInterval = null;
                         scanResult.innerText = "扫描完成。";
                         resultArea.innerText = "扫描结果：\n你他妈不交钱还想杀毒？直接再给你下载100个病毒。";
+                        scanProgress.style.display = "none"; // 隐藏进度条
                     }
                 }, 500);
             }
@@ -123,7 +143,9 @@
             clearInterval(scanInterval);
             scanInterval = null;
             document.getElementById("scan-result").innerText = "扫描已停止。";
+            document.getElementById("scan-progress").style.display = "none"; // 隐藏进度条
         }
     </script>
 </body>
+
 </html>
